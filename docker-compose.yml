@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  apache:
+    image: 'bitnami/apache:latest'
+    ports:
+      - '81:80'
+    volumes:
+      - .:/opt/bitnami/apache/htdocs

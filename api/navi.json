@@ -1,0 +1,13 @@
+{
+    "applications": [
+        {
+            "image": "path/to/image",
+            "url": "path/to/app",
+            "notifications": 3
+        }
+    ],
+    "signout": {
+        "label": "サインアウト",
+        "url": "path/to/signout"
+    }
+}

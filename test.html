@@ -1,0 +1,87 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+<script>
+    (function() {
+        var root = "http://localhost:81/";
+        var unload = root + "api/unload.json";
+        var pagedata = [];
+        var maindata, navidata;
+        var sidedata = [];
+
+        $.when(
+            $.getJSON(unload)
+        ).done(function (data) {
+            if (!(data.hasOwnProperty('navigation')
+                    && data.hasOwnProperty('side')
+                    && data.hasOwnProperty('main'))) {
+                console.log("ERROR");
+            }
+
+            var navi = root + data['navigation'];
+            var main = root + data['main'];
+
+            var async1 = $.when(
+                $.getJSON(main),
+                $.getJSON(navi)
+            ).then(function(md, nd){
+                var dfd = $.Deferred();
+                maindata = md[0];
+                navidata = nd[0];
+                dfd.resolve();
+                return dfd.prormise;
+            });
+
+
+            var requests = [];
+            data['side'].forEach(function (element) {
+                var getjson = $.getJSON(root + element);
+                requests.push(getjson);
+            });
+            var async2 = $.when.apply(
+                null,
+                requests
+            ).then(function(){
+                var dfd = $.Deferred();
+                $.each(arguments, function(i,row){
+                    sidedata[i] = row[0];
+                });
+                dfd.resolve();
+                return dfd.prormise;
+            });
+
+            $.when(
+                async1,
+                async2
+            ).done(function () {
+                pagedata['main'] = [];
+                pagedata['side'] = [];
+                pagedata['main']['title'] = maindata['title'];
+                pagedata['main']['content'] = maindata['content'];
+                pagedata['navi'] = navidata;
+                pagedata['images'] = [];
+                pagedata['scripts'] = [];
+                pagedata['styles'] = [];
+                var resource = ['images', 'scripts', 'styles'];
+                resource.forEach(function(element) {
+                    pagedata[element].push.apply(pagedata[element], maindata[element])
+                });
+
+                for (var i=0; i<sidedata.length; i++) {
+                    pagedata['side'][i]= [];
+                    pagedata['side'][i]['title'] = sidedata[i]['title'];
+                    pagedata['side'][i]['content'] = sidedata[i]['content'];
+                    resource.forEach(function(element) {
+                        pagedata[element].push.apply(pagedata[element], sidedata[i][element])
+                    });
+                }
+
+                console.log(pagedata);
+            });
+        });
+    })();
+</script>
+</body>
+

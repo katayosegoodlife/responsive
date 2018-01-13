@@ -3,67 +3,158 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        .navbar {
+            background-color: #3b5998;
+            font-size: 22px;
+            margin-top: 7px;
+            padding: 15px;
+            width: 20%;
+            float: left;
+        }
+
+        /* Define how each icon button should look like */
+        .button {
+            color: white;
+            display: inline-block; /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
+            position: relative; /* All 'absolute'ly positioned elements are relative to this one */
+            padding: 2px 5px; /* Add some padding so it looks nice */
+        }
+
+        /* Make the badge float in the top right corner of the button */
+        .button__badge {
+            background-color: #fa3e3e;
+            border-radius: 2px;
+            color: white;
+
+            padding: 1px 3px;
+            font-size: 10px;
+
+            position: absolute; /* Position the badge within the relatively positioned button */
+            top: 0;
+            right: 0;
+        }
         * {
             box-sizing: border-box;
         }
         .menu {
             float:left;
-            width:20%;
+            width:77%;
             text-align:center;
+            padding-left: 5px;
         }
         .menuitem {
-            background-color:#e5e5e5;
-            padding:8px;
-            margin-top:7px;
+            background-color: #e5e5e5;
+            padding-left: 8px;
+            margin-top: 7px;
+            width:100%;
+            float: left;
         }
-        .main {
-            float:left;
-            width:60%;
-            padding:0 20px;
+        .header {
+            display: block;
+            box-sizing: border-box;
+            height: 41px;
+            width: 100%;
+            border-top: none;
+            border-radius: 0px 0px 70px 70px;
+            margin: 0;
+            background-color: rgb( 255, 223, 191 );
         }
-        .right {
-            background-color:#e5e5e5;
-            float:left;
-            width:20%;
-            padding:15px;
-            margin-top:7px;
-            text-align:center;
-        }
-
-        @media only screen and (max-width:620px) {
+        @media only screen and (max-width:500px) {
             /* For mobile phones: */
-            .menu, .main, .right {
+            .navbar{
                 width:100%;
             }
+            .menu{
+                width:100%;
+                padding-left: 0;
+            }
+            .menuitem {
+                width:100%;
+            }
+
         }
+        .bars{
+            display: none;
+        }
+        @media only screen and (max-width:1200px) {
+            .header{
+                height: 41px;
+                width: 20px;
+                border-top: none;
+                border-radius: 0px;
+                margin: 0px;
+                background-color: rgb( 255, 223, 191 );
+            }
+            .bars{
+                display: block;
+            }
+        }
+
+            .clear {
+           clear:both;
+        }
+
+        .overlay {
+            width: 80%;
+            display: none;
+
+        }
+        .transition{
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition:all 0.5s ease-in-out;
+            -o-transition:all 0.5s ease-in-out;
+            transition:all 0.5s ease-in-out;
+        }
+
+
     </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    function myFunction() {
+        $(".overlay").toggle();
+    }
+</script>
 </head>
+
 <body style="font-family:Verdana;color:#aaaaaa;">
 
-<div style="background-color:#e5e5e5;padding:15px;text-align:center;">
-    <h1>Hello World</h1>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
+<div style="background-color: blue" onclick="myFunction()" class="header button">
+    <div class="bars">
+    <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
 </div>
+<div class="clear"></div>
 
-<div style="overflow:auto">
+<div class="overlay transition">
+    <div class="navbar">
+        <div class="button">
+            <i class="fa fa-globe"></i>
+            <span class="button__badge">2</span>
+        </div>
+        <div class="button">
+            <i class="fa fa-comments"></i>
+            <span class="button__badge">4</span>
+        </div>
+        <div class="button">
+            <i class="fa fa-comments"></i>
+            <span class="button__badge">4</span>
+        </div>
+        <div class="button">
+            <i class="fa fa-comments"></i>
+            <span class="button__badge">4</span>
+        </div>
+        <div class="button">
+            <i class="fa fa-check-circle"></i>
+            <span class="button__badge">4</span>
+        </div>
+    </div>
     <div class="menu">
-        <div class="menuitem">Link 1</div>
-        <div class="menuitem">Link 2</div>
-        <div class="menuitem">Link 3</div>
-        <div class="menuitem">Link 4</div>
-    </div>
-
-    <div class="main">
-        <h2>Lorum Ipsum</h2>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-    </div>
-
-    <div class="right">
-        <h2>About</h2>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+        <div class="menuitem">item</div>
+        <div class="menuitem">item</div>
+        <div class="menuitem">item</div>
+        <div class="menuitem">item</div>
     </div>
 </div>
-
-<div style="background-color:#e5e5e5;text-align:center;padding:10px;margin-top:7px;">© copyright w3schools.com</div>
-
 </body>
 </html>

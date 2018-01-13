@@ -1,0 +1,13 @@
+{
+    "title": "ページのたいとる",
+    "content": "HTML",
+    "styles": [
+        "path/to/style"
+    ],
+    "images": [
+        "path/to/image"
+    ],
+    "scripts": [
+        "path/to/script"
+    ]
+}
