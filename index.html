@@ -163,7 +163,6 @@
             }
             .logout {
                 float: right;
-
             }
 
         }
@@ -178,7 +177,8 @@
 
 <script>
     $(window).resize(function () {
-        if ($(window).width() > 1200)
+        console.log($(window).width());
+        if ($(window).width() > 1100)
         {
             $("body").css("background-color","transparent"); //edit, body must be in quotes!
             $(".sublayer").attr("style","");
