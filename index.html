@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<meta charset="UTF-8">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -55,10 +56,8 @@
             border-top: none;
             border-radius: 0px;
             margin: 0px;
-            background-color: rgb( 255, 223, 191 );
-        }
-        .bars{
-            display: block;
+            background-color: rgb(255, 223, 191);
+            display: none;
         }
 
 
@@ -74,7 +73,7 @@
             transition: 0.5s;
             padding-top: 0px;
         }
-        .overlayheader {
+        .sublayerheader {
             width: 100%;
             background-color: #3b5998;
             font-size: 28px;
@@ -82,15 +81,16 @@
             padding-right: 10px;
         }
 
-        .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
         @media only screen and (min-width:500px) {
-            /* For mobile phones: */
+            .header {
+                display: block;
+                box-sizing: border-box;
+                height: 41px;
+                width: 110%;
+                margin: -8px -10px 0 -10px;
+                padding: 0;
+                background-color: #3b5998;
+            }
             .navbar{
                 height: 100%;
                 width:20%;
@@ -102,43 +102,70 @@
             .menuitem {
                 width:100%;
             }
-
+            #top-left-button {
+                float: left;
+                /*display: none;*/
+                margin-top: -37px;
+            }
         }
 
-        @media only screen and (min-width:1200px) {
-            .header{
+        @media only screen and (min-width:1100px) {
+            .header {
                 display: block;
                 box-sizing: border-box;
                 height: 41px;
                 width: 100%;
-                border-top: none;
                 border-radius: 0px 0px 70px 70px;
-                margin: 0;
-                background-color: rgb( 255, 223, 191 );
+                margin: -8px 0 0 0;
+                padding: 0;
+                background-color: #3b5998;
             }
-            .bars{
-                top: 0;
-                display: none;
+            .navbar {
+                clear: both;
+                /*display: none;*/
+                background-color: transparent;
+                filter: alpha(opacity=50);
+                margin-top: -4px;
+                padding: 10px 0px 7px 50px;
+                height: 50px;
+                width: 100%;
+                float: none;
             }
-            .navbar{
-                display: none;
-            }
-            .menu{
+            .menu {
+                border-style: dotted;
+                border-color: black;
+
                 display: block;
-                width:50%;
-                padding-left: 0;
+                width: 25%;
+                padding-left: 0px;
+
+                margin-top: 70px;
+                margin-left: 10px;
+            }
+            .menuitem {
+                padding-left: 8px;
+                margin-top: 7px;
+                width:100%;
+                float: left;
+
             }
             .sublayer {
+                width: 100%;
+                height: 100%;
                 display: block;
                 background-color: transparent;
             }
-            .overlayheader {
+            .sublayerheader {
                 display: none;
             }
             #top-left-button {
                 display: none;
+            }
+            .logout {
+                float: right;
 
             }
+
         }
 
         .clear {
@@ -146,54 +173,17 @@
         }
 
 
-        .sidenav {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-
-        .sidenav a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidenav a:hover {
-            color: #f1f1f1;
-        }
-
-        .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        @media screen and (max-height: 450px) {
-            .sidenav {padding-top: 15px;}
-            .sidenav a {font-size: 18px;}
-        }
-
-
     </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script>
-    function myFunction() {
-        $(".sublayer").toggle();
-    }
-</script>
-<script>
+    $(window).resize(function () {
+        if ($(window).width() > 1200)
+        {
+            $("body").css("background-color","transparent"); //edit, body must be in quotes!
+            $(".sublayer").attr("style","");
+        }
+    });
     function openNav() {
         $(".sublayer").width("85%");
         $("body").css("background-color","gray"); //edit, body must be in quotes!
@@ -202,7 +192,6 @@
     function closeNav() {
         $(".sublayer").width("0%");
         $("body").css("background-color","transparent"); //edit, body must be in quotes!
-
     }
 </script>
 </head>
@@ -210,6 +199,7 @@
 <body style="font-family:Verdana;color:#aaaaaa;">
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
+<div class="header"></div>
 <div id=top-left-button class="button" onclick="openNav()" style="background-color: #3b5998;" >
     <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
     <span class="button__badge">10</span>
@@ -217,7 +207,7 @@
 <div class="clear"></div>
 
 <div class="sublayer">
-    <div class="overlayheader">
+    <div class="sublayerheader">
         <i class="fa fa-bars fa-1x"  onclick="closeNav()" aria-hidden="true"></i>
     </div>
     <div class="navbar">
@@ -263,21 +253,14 @@
         </div>
     </div>
     <div class="menu">
-        <div class="menuitem">item</div>
-        <div class="menuitem">item</div>
-        <div class="menuitem">item</div>
-        <div class="menuitem">item</div>
+        <div class="menuitem">item item item item item item item item item item item item item item item item </div>
+        <div class="menuitem">item item item item item item item item item item item item item item item item </div>
+        <div class="menuitem">item item item item item item item item item item item item item item item item </div>
+        <div class="menuitem">item item item item item item item item item item item item item item item item </div>
+        <div class="menuitem">item item item item item item item item item item item item item item item item </div>
+        <div class="menuitem">item item item item item item item item item item item item item item item item </div>
     </div>
 </div>
-
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
-</div>
-
 
 </body>
 </html>
