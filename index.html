@@ -8,19 +8,17 @@
             font-size: 22px;
             margin-top: 7px;
             padding: 15px;
-            width: 20%;
+            width: 100%;
             float: left;
         }
 
-        /* Define how each icon button should look like */
         .button {
             color: white;
-            display: inline-block; /* Inline elements with width and height. TL;DR they make the icon buttons stack from left-to-right instead of top-to-bottom */
-            position: relative; /* All 'absolute'ly positioned elements are relative to this one */
-            padding: 2px 5px; /* Add some padding so it looks nice */
+            display: inline-block;
+            position: relative;
+            padding: 2px 5px;
         }
 
-        /* Make the badge float in the top right corner of the button */
         .button__badge {
             background-color: #fa3e3e;
             border-radius: 2px;
@@ -29,7 +27,7 @@
             padding: 1px 3px;
             font-size: 10px;
 
-            position: absolute; /* Position the badge within the relatively positioned button */
+            position: absolute;
             top: 0;
             right: 0;
         }
@@ -38,9 +36,10 @@
         }
         .menu {
             float:left;
-            width:77%;
+            width:100%;
             text-align:center;
-            padding-left: 5px;
+            padding-left: 0px;
+
         }
         .menuitem {
             background-color: #e5e5e5;
@@ -48,62 +47,142 @@
             margin-top: 7px;
             width:100%;
             float: left;
+
         }
         .header {
-            display: block;
-            box-sizing: border-box;
             height: 41px;
-            width: 100%;
+            width: 20px;
             border-top: none;
-            border-radius: 0px 0px 70px 70px;
-            margin: 0;
+            border-radius: 0px;
+            margin: 0px;
             background-color: rgb( 255, 223, 191 );
         }
-        @media only screen and (max-width:500px) {
+        .bars{
+            display: block;
+        }
+
+
+        .sublayer {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: white;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 0px;
+        }
+        .overlayheader {
+            width: 100%;
+            background-color: #3b5998;
+            font-size: 28px;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        @media only screen and (min-width:500px) {
             /* For mobile phones: */
             .navbar{
-                width:100%;
+                height: 100%;
+                width:20%;
             }
             .menu{
-                width:100%;
-                padding-left: 0;
+                width:78%;
+                padding-left: 2%;
             }
             .menuitem {
                 width:100%;
             }
 
         }
-        .bars{
-            display: none;
-        }
-        @media only screen and (max-width:1200px) {
+
+        @media only screen and (min-width:1200px) {
             .header{
+                display: block;
+                box-sizing: border-box;
                 height: 41px;
-                width: 20px;
+                width: 100%;
                 border-top: none;
-                border-radius: 0px;
-                margin: 0px;
+                border-radius: 0px 0px 70px 70px;
+                margin: 0;
                 background-color: rgb( 255, 223, 191 );
             }
             .bars{
+                top: 0;
+                display: none;
+            }
+            .navbar{
+                display: none;
+            }
+            .menu{
                 display: block;
+                width:50%;
+                padding-left: 0;
+            }
+            .sublayer {
+                display: block;
+                background-color: transparent;
+            }
+            .overlayheader {
+                display: none;
+            }
+            #top-left-button {
+                display: none;
+
             }
         }
 
-            .clear {
+        .clear {
            clear:both;
         }
 
-        .overlay {
-            width: 80%;
-            display: none;
 
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
         }
-        .transition{
-            -webkit-transition: all 0.5s ease-in-out;
-            -moz-transition:all 0.5s ease-in-out;
-            -o-transition:all 0.5s ease-in-out;
-            transition:all 0.5s ease-in-out;
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
         }
 
 
@@ -111,7 +190,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
     function myFunction() {
-        $(".overlay").toggle();
+        $(".sublayer").toggle();
+    }
+</script>
+<script>
+    function openNav() {
+        $(".sublayer").width("85%");
+        $("body").css("background-color","gray"); //edit, body must be in quotes!
+    }
+
+    function closeNav() {
+        $(".sublayer").width("0%");
+        $("body").css("background-color","transparent"); //edit, body must be in quotes!
+
     }
 </script>
 </head>
@@ -119,14 +210,16 @@
 <body style="font-family:Verdana;color:#aaaaaa;">
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
-<div style="background-color: blue" onclick="myFunction()" class="header button">
-    <div class="bars">
-    <i class="fa fa-bars" aria-hidden="true"></i>
-    </div>
+<div id=top-left-button class="button" onclick="openNav()" style="background-color: #3b5998;" >
+    <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+    <span class="button__badge">10</span>
 </div>
 <div class="clear"></div>
 
-<div class="overlay transition">
+<div class="sublayer">
+    <div class="overlayheader">
+        <i class="fa fa-bars fa-1x"  onclick="closeNav()" aria-hidden="true"></i>
+    </div>
     <div class="navbar">
         <div class="button">
             <i class="fa fa-globe"></i>
@@ -148,6 +241,26 @@
             <i class="fa fa-check-circle"></i>
             <span class="button__badge">4</span>
         </div>
+        <div class="button">
+            <i class="fa fa-check-circle"></i>
+            <span class="button__badge">4</span>
+        </div>
+        <div class="button">
+            <i class="fa fa-check-circle"></i>
+            <span class="button__badge">4</span>
+        </div>
+        <div class="button">
+            <i class="fa fa-check-circle"></i>
+        </div>
+        <div class="button">
+            <i class="fa fa-check-circle"></i>
+        </div>
+        <div class="button">
+            <i class="fa fa-check-circle"></i>
+        </div>
+        <div class="button">
+            <i class="fa fa-check-circle"></i>
+        </div>
     </div>
     <div class="menu">
         <div class="menuitem">item</div>
@@ -156,5 +269,15 @@
         <div class="menuitem">item</div>
     </div>
 </div>
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+
+
 </body>
 </html>
